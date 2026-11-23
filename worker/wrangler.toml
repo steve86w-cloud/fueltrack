@@ -1,0 +1,7 @@
+name = "fueltrack-ai"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+
+[vars]
+ALLOWED_ORIGIN = "https://steve86w-cloud.github.io"
+MODEL = "gpt-4.1-mini"
