@@ -1,21 +1,18 @@
-# FuelTrack — iPhone + Android PWA
+# FuelTrack V4 — food database update
 
-FuelTrack is a local-first demonstration app, not an App Store or Play Store application.
+This is a drop-in update for your existing FuelTrack GitHub Pages repository. Upload the **contents** of this folder into the existing `fueltrack` repository and overwrite files with the same name. **Do not create a second repository.**
 
-## Free deployment (GitHub Pages)
-1. Create a public GitHub repository named `fueltrack` (or any name).
-2. Upload **all the contents** of this folder, preserving `icons/` (not the enclosing folder).
-3. In repository **Settings → Pages**, choose **Deploy from a branch**, `main`, `/ (root)` and Save.
-4. Open the HTTPS URL GitHub provides, typically `https://YOUR_USERNAME.github.io/fueltrack/`.
-5. iPhone 13 Pro: open that URL in **Safari → Share → Add to Home Screen → Add**.
-6. Pixel 8a: open it in **Chrome → ⋮ → Install app** (or Add to Home screen).
+## Features
+- Searchable 100+ food reference entries grouped by category (values per 100 g/mL, indicative only).
+- Portion editing by grams/mL, calculating calories and macros automatically.
+- Custom foods saved locally in your existing FuelTrack data, and searchable under My foods.
+- Recently logged filter; diary, weight, settings, meal plans, and prior saved data retained.
+- Works offline after refreshing the installed app online.
 
-## Important notes
-- Data is stored locally in browser storage. Data does NOT synchronise between phones.
-- Use **Settings → Export backup** regularly; clear-site-data, uninstalling, or browser cleanup may delete entries.
-- Offline app files are cached after a successful hosted visit. Test by installing, opening once online, then switching to airplane mode.
-- Barcode scanning, camera AI, cloud sync and live food databases are NOT implemented in this build.
-- `index.html` opened from Files is a preview only: service workers and installability require HTTPS or localhost.
-- Food nutrition values are estimates, not medical advice.
+## Update on Android Pixel 8a
+1. Replace existing repository files and commit changes; verify GitHub Pages deploys.
+2. Open FuelTrack in Chrome at the existing website address, **refresh once while online**, then close/reopen the installed app.
+3. Look for `V4` in the header. If old version persists, close app, revisit URL in Chrome and refresh again. **Do not clear app data or uninstall** without making a backup first.
 
-Files: `index.html`, `manifest.webmanifest`, `sw.js`, `icons/*`.
+## Nutrition and privacy
+Generic values are **illustrative averages**, not an authoritative Australian product database. Check each product's nutrition information panel. Personal foods and diary stay in this device's localStorage; the GitHub repository only holds public application code, not your diary. Export a backup regularly.
