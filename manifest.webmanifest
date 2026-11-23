@@ -1,0 +1,17 @@
+{
+  "id": "./",
+  "name": "FuelTrack — Nutrition & Progress",
+  "short_name": "FuelTrack",
+  "description": "A private, offline-friendly nutrition and weight diary.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b1115",
+  "theme_color": "#0b1217",
+  "orientation": "portrait-primary",
+  "lang": "en-AU",
+  "icons": [
+    {"src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}
