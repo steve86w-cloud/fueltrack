@@ -118,9 +118,22 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 .scan-product{border:1px solid #506951;background:#25382c;padding:13px;border-radius:14px;margin-top:12px}.scan-product h3{margin-top:7px;font-size:16px}.scan-macros{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:11px 0}.scan-macros strong{color:var(--lime)}
 #scannerFallbackContainer video{max-width:100%;border-radius:12px}
 @media(max-width:440px){.barcode-tools{padding:11px}.barcode-form{gap:6px}.barcode-form button{padding:9px 11px}.scan-macros{gap:8px;font-size:12px}}
-</style></head><body><div class="shell"><header class="top"><div class="brand"><div class="logo">✳</div><div>fueltrack <small>V5</small></div></div><div class="profile"><span class="pill hide-mobile" id="headerDate"></span><button class="pill" onclick="navigate('settings')" aria-label="Settings">⚙ Settings</button></div></header>
-<main><section id="today" class="view active"><div class="page-head"><div><div class="eyebrow">YOUR DAILY OVERVIEW</div><h1 id="greeting">Your nutrition, simplified.</h1><div class="sub" id="todayLabel"></div></div><button class="action" onclick="openFood()">+ Add food</button></div><div class="grid"><div class="stack"><article class="card hero"><div class="card-heading"><h2>Calories today</h2><span class="tag">DAILY GOAL</span></div><div class="calrow"><div class="ring" id="calRing"><div class="ring-inner"><div class="huge" id="ringRemaining">2,000</div><div class="small" id="ringText">remaining</div></div></div><div class="cal-summary"><div class="small">Consumed</div><div class="huge" id="consumed">0</div><div class="sub">of <b id="targetLabel">2,000</b> kcal target</div><div class="stats3"><div><span class="small">Food</span><strong id="foodTotal">0</strong></div><div><span class="small">Exercise</span><strong id="exerciseTotal">0</strong></div></div></div></div><div class="quick-actions"><button class="action sm" onclick="openFood()">＋ Log meal</button><button class="action secondary sm" onclick="openBarcode()">▥ Scan barcode</button><button class="action secondary sm" onclick="openWeight()">⚖ Log weight</button><button class="action secondary sm" onclick="openExercise()">⚡ Exercise</button></div></article><article class="card"><div class="card-heading"><h2>Macro breakdown</h2><span class="sub">Consumed / goal</span></div><div id="macrosToday"></div></article><article class="card"><div class="card-heading"><h2>Today's meals</h2><button class="action ghost sm" onclick="navigate('diary')">Open diary →</button></div><div id="todayMeals"></div></article></div><div class="stack"><article class="card"><div class="card-heading"><h2>Your next move</h2><span>✦</span></div><div class="tip" id="insight"></div></article><article class="card"><div class="card-heading"><h2>Hydration</h2><span class="tag" id="waterCount">0 / 8 glasses</span></div><div class="metric-grid"><div class="metric"><span class="sub">Water</span><div class="value" id="waterML">0 mL</div><span class="small">250 mL per glass</span></div><div class="metric"><span class="sub">Quick add</span><div style="margin-top:13px"><button class="action sm" onclick="changeWater(1)">+ Glass</button></div><button class="action ghost sm" onclick="changeWater(-1)">− Undo</button></div></div></article><article class="card"><div class="card-heading"><h2>Weight journey</h2><button class="action ghost sm" onclick="navigate('progress')">View progress →</button></div><div class="metric-grid"><div class="metric"><span class="sub">Latest</span><div class="value" id="latestWeight">—</div><span class="small">kg</span></div><div class="metric"><span class="sub">Goal</span><div class="value" id="goalWeightToday">90</div><span class="small">kg</span></div></div><p class="sub" id="weightInsight" style="margin-bottom:0">Record your weight to see progress.</p></article></div></div></section>
-<section id="diary" class="view"><div class="page-head"><div><div class="eyebrow">FOOD JOURNAL</div><h1>Food diary</h1><div class="sub">A simple record of what you've eaten.</div></div><div class="quick-actions" style="margin:0"><button class="action" onclick="openFood()">+ Add food</button><button class="action secondary" onclick="openBarcode()">▥ Scan</button></div></div><div class="datebar"><button onclick="stepDate(-1)" aria-label="Previous day">‹</button><strong id="diaryDate"></strong><button onclick="stepDate(1)" aria-label="Next day">›</button><button class="action secondary sm" onclick="resetDate()">Today</button></div><div class="grid"><div class="stack"><div id="diaryMeals"></div></div><div class="stack"><article class="card"><h2>Daily totals</h2><div style="margin:12px 0 18px" class="huge" id="diaryCalories">0 <span class="small">kcal</span></div><div id="macrosDiary"></div><hr class="divider"><div class="row"><span class="sub">Copy yesterday's food</span><button class="action secondary sm" onclick="copyYesterday()">Copy</button></div></article><article class="card"><h2>Movement</h2><div class="sub" style="margin:8px 0">Optional activity tracking. Calories burned are shown separately from the food goal.</div><div id="diaryExercise" class="list"></div><button class="action secondary sm" onclick="openExercise()" style="margin-top:14px">+ Log exercise</button></article></div></div></section>
+
+/* V6 smart diary: mobile first, independent of existing V5 storage */
+.smart-card{background:#1a2a25;border:1px solid #4b7046;border-radius:16px;padding:14px;margin-bottom:14px}
+.smart-card textarea{width:100%;min-height:105px;resize:vertical;font:inherit;font-size:16px;background:#0d1817;color:#f5f8ee;border:1px solid #52645d;border-radius:12px;padding:12px;box-sizing:border-box}
+.smart-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.smart-actions .action{min-height:46px}
+.smart-preview{padding:12px;border:1px solid #415852;border-radius:12px;background:#14201e;margin-top:12px}
+.smart-row{display:grid;grid-template-columns:minmax(0,1fr) 75px;gap:10px;align-items:center;border-bottom:1px solid #374841;padding:10px 0}
+.smart-row:last-child{border-bottom:0}.smart-row input{width:100%;font-size:16px;background:#0c1918;color:#fafcf6;border:1px solid #53675e;border-radius:9px;padding:10px;box-sizing:border-box}
+.smart-name{font-weight:700;overflow-wrap:anywhere}.smart-macro{font-size:12px;color:#b3c4b8;margin-top:5px}
+.smart-note{font-size:12px;color:#b5c0b5;line-height:1.6}.smart-photo{max-width:100%;max-height:200px;object-fit:contain;border-radius:10px;margin-top:10px}
+.smart-alert{color:#f6caa1;font-size:13px;margin-top:10px;line-height:1.5}
+.smart-footer{position:sticky;bottom:-2px;background:#111c19;padding:12px 0 6px;border-top:1px solid #3b5749;margin-top:10px}
+@media(max-width:430px){#smartDiaryDialog{width:calc(100vw - 18px);max-width:none;padding:15px;max-height:calc(100dvh - 20px)}.smart-actions .action{flex:1;min-width:110px}}
+</style></head><body><div class="shell"><header class="top"><div class="brand"><div class="logo">✳</div><div>fueltrack <small>V6</small></div></div><div class="profile"><span class="pill hide-mobile" id="headerDate"></span><button class="pill" onclick="navigate('settings')" aria-label="Settings">⚙ Settings</button></div></header>
+<main><section id="today" class="view active"><div class="page-head"><div><div class="eyebrow">YOUR DAILY OVERVIEW</div><h1 id="greeting">Your nutrition, simplified.</h1><div class="sub" id="todayLabel"></div></div><button class="action" onclick="openSmartDiary()">✦ Smart log</button></div><div class="grid"><div class="stack"><article class="card hero"><div class="card-heading"><h2>Calories today</h2><span class="tag">DAILY GOAL</span></div><div class="calrow"><div class="ring" id="calRing"><div class="ring-inner"><div class="huge" id="ringRemaining">2,000</div><div class="small" id="ringText">remaining</div></div></div><div class="cal-summary"><div class="small">Consumed</div><div class="huge" id="consumed">0</div><div class="sub">of <b id="targetLabel">2,000</b> kcal target</div><div class="stats3"><div><span class="small">Food</span><strong id="foodTotal">0</strong></div><div><span class="small">Exercise</span><strong id="exerciseTotal">0</strong></div></div></div></div><div class="quick-actions"><button class="action sm" onclick="openSmartDiary()">✦ Smart log</button><button class="action secondary sm" onclick="openFood()">＋ Log meal</button><button class="action secondary sm" onclick="openBarcode()">▥ Scan barcode</button><button class="action secondary sm" onclick="openWeight()">⚖ Log weight</button><button class="action secondary sm" onclick="openExercise()">⚡ Exercise</button></div></article><article class="card"><div class="card-heading"><h2>Macro breakdown</h2><span class="sub">Consumed / goal</span></div><div id="macrosToday"></div></article><article class="card"><div class="card-heading"><h2>Today's meals</h2><button class="action ghost sm" onclick="navigate('diary')">Open diary →</button></div><div id="todayMeals"></div></article></div><div class="stack"><article class="card"><div class="card-heading"><h2>Your next move</h2><span>✦</span></div><div class="tip" id="insight"></div></article><article class="card"><div class="card-heading"><h2>Hydration</h2><span class="tag" id="waterCount">0 / 8 glasses</span></div><div class="metric-grid"><div class="metric"><span class="sub">Water</span><div class="value" id="waterML">0 mL</div><span class="small">250 mL per glass</span></div><div class="metric"><span class="sub">Quick add</span><div style="margin-top:13px"><button class="action sm" onclick="changeWater(1)">+ Glass</button></div><button class="action ghost sm" onclick="changeWater(-1)">− Undo</button></div></div></article><article class="card"><div class="card-heading"><h2>Weight journey</h2><button class="action ghost sm" onclick="navigate('progress')">View progress →</button></div><div class="metric-grid"><div class="metric"><span class="sub">Latest</span><div class="value" id="latestWeight">—</div><span class="small">kg</span></div><div class="metric"><span class="sub">Goal</span><div class="value" id="goalWeightToday">90</div><span class="small">kg</span></div></div><p class="sub" id="weightInsight" style="margin-bottom:0">Record your weight to see progress.</p></article></div></div></section>
+<section id="diary" class="view"><div class="page-head"><div><div class="eyebrow">FOOD JOURNAL</div><h1>Food diary</h1><div class="sub">A simple record of what you've eaten.</div></div><div class="quick-actions" style="margin:0"><button class="action" onclick="openSmartDiary()">✦ Smart log</button><button class="action secondary" onclick="openFood()">+ Food</button><button class="action secondary" onclick="openBarcode()">▥ Scan</button></div></div><div class="datebar"><button onclick="stepDate(-1)" aria-label="Previous day">‹</button><strong id="diaryDate"></strong><button onclick="stepDate(1)" aria-label="Next day">›</button><button class="action secondary sm" onclick="resetDate()">Today</button></div><div class="grid"><div class="stack"><div id="diaryMeals"></div></div><div class="stack"><article class="card"><h2>Daily totals</h2><div style="margin:12px 0 18px" class="huge" id="diaryCalories">0 <span class="small">kcal</span></div><div id="macrosDiary"></div><hr class="divider"><div class="row"><span class="sub">Copy yesterday's food</span><button class="action secondary sm" onclick="copyYesterday()">Copy</button></div></article><article class="card"><h2>Movement</h2><div class="sub" style="margin:8px 0">Optional activity tracking. Calories burned are shown separately from the food goal.</div><div id="diaryExercise" class="list"></div><button class="action secondary sm" onclick="openExercise()" style="margin-top:14px">+ Log exercise</button></article></div></div></section>
 <section id="plan" class="view"><div class="page-head"><div><div class="eyebrow">LESS PLANNING, MORE CONSISTENCY</div><h1>Meal inspiration</h1><div class="sub">Simple meals you can add to your diary in one tap.</div></div></div><div class="grid"><div class="stack"><article class="card"><div class="card-heading"><h2>Easy high-protein choices</h2><span class="tag">EXAMPLE MEALS</span></div><div class="sub" style="margin-bottom:15px">Approximate values only. Check the nutrition labels and adjust quantities for the foods you actually eat.</div><div id="mealIdeas"></div></article></div><div class="stack"><article class="card"><h2>Build a repeatable routine</h2><p class="sub">Choose a protein at each meal, then adjust the carb and fat portions to suit your calorie target. Your diary keeps the final amounts.</p><div class="tip">A protein target is a preference, not a medical prescription. An unusually high target may be difficult to meet within your calories. Adjust it under Settings as needed.</div></article><article class="card"><h2>Quick repeat</h2><p class="sub">Use your previous day's meals as a starting point rather than logging everything again.</p><button class="action secondary" onclick="copyYesterday()">Copy yesterday into today</button></article></div></div></section>
 <section id="progress" class="view"><div class="page-head"><div><div class="eyebrow">THE LONG GAME</div><h1>Track your progress</h1><div class="sub">Consistency over perfection.</div></div><button class="action" onclick="openWeight()">+ Log weight</button></div><div class="grid"><div class="stack"><article class="card"><div class="card-heading"><h2>Weight trend</h2><span class="tag" id="weightCount">0 ENTRIES</span></div><svg id="weightChart" class="chart" viewBox="0 0 590 210" role="img" aria-label="Weight history graph"><text fill="#98a8ab" x="12" y="100">Log weight twice to show a trend.</text></svg><div class="legend"><span><span class="dot" style="background:var(--lime)"></span>Logged weight</span><span><span class="dot" style="background:var(--peach)"></span>Goal weight</span></div></article><article class="card"><div class="card pwa-install-card" id="installPanel">
 <h2>Install FuelTrack on your phone</h2>
@@ -131,6 +144,19 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 </div><div class="card-heading"><h2>Weight entries</h2><button class="action ghost sm" onclick="openWeight()">+ New</button></div><div id="weightEntries"></div></article></div><div class="stack"><article class="card"><div class="metric-grid"><div class="metric"><span class="sub">Starting</span><div class="value" id="startWeight">—</div><span class="small">kg</span></div><div class="metric"><span class="sub">Latest</span><div class="value" id="progressWeight">—</div><span class="small">kg</span></div></div><hr class="divider"><div class="row"><span class="sub">Change since first entry</span><strong id="weightChange">—</strong></div><hr class="divider"><div class="row"><span class="sub">Target weight</span><strong id="progressGoal">90 kg</strong></div></article><article class="card"><h2>Weekly view</h2><p class="sub">Track habits as well as your weight. Day-to-day weight changes can reflect water, sodium and other factors.</p><div id="weeklyCheck" class="list"></div></article></div></div></section>
 <section id="settings" class="view"><div class="page-head"><div><div class="eyebrow">YOUR APP</div><h1>Targets & settings</h1><div class="sub">Personalise your goals and back up your data.</div></div></div><div class="grid"><article class="card"><h2>Nutrition goals</h2><form id="targetForm" class="formgrid" style="margin-top:18px"><div class="field"><label for="setCal">Calories / day</label><input id="setCal" type="number" min="500" max="10000" required></div><div class="field"><label for="setWeight">Goal weight (kg)</label><input id="setWeight" type="number" min="20" max="400" step="0.1" required></div><div class="field"><label for="setProtein">Protein (g)</label><input id="setProtein" type="number" min="0" max="600" required></div><div class="field"><label for="setCarbs">Carbs (g)</label><input id="setCarbs" type="number" min="0" max="1000" required></div><div class="field"><label for="setFat">Fat (g)</label><input id="setFat" type="number" min="0" max="400" required></div><div class="field"><label for="setWater">Water (glasses/day)</label><input id="setWater" type="number" min="1" max="40" required></div><div class="full"><button class="action" type="submit">Save my targets</button></div></form><p class="notice">Macro goals do not automatically need to add up to the calorie target. For reference: protein/carbs ≈4 kcal per gram, fat ≈9 kcal per gram.</p></article><div class="stack"><article class="card"><h2>Your data stays with you</h2><p class="sub">This demo saves entries locally in this browser on this device. No account, subscription or server is needed. Browsers can clear local storage, so export regular backups.</p><div class="quick-actions"><button class="action secondary sm" onclick="exportBackup()">⬇ Export backup</button><label class="action secondary sm" style="cursor:pointer">⬆ Import backup<input type="file" accept=".json,application/json" onchange="importBackup(event)" style="display:none"></label></div></article><article class="card"><h2>About this version</h2><p class="sub">FuelTrack V5 adds camera barcode scanning and online product lookups via Open Food Facts. Camera scans and product searches need a connection; saved foods and your diary remain available offline. Values are community-contributed: check packaging before logging. No cloud sync or AI coaching is included.</p><p class="notice">For personal use only, not medical advice. Exercise calorie estimates can be inaccurate and do not automatically increase your daily food goal.</p><button class="action warn sm" onclick="resetAll()">Reset all saved data</button></article></div></div></section></main></div>
 <nav class="nav" aria-label="Main navigation"><button data-tab="today" class="active" onclick="navigate('today')"><span>◉</span>Today</button><button data-tab="diary" onclick="navigate('diary')"><span>▤</span>Diary</button><button data-tab="plan" onclick="navigate('plan')"><span>◈</span>Meals</button><button data-tab="progress" onclick="navigate('progress')"><span>↗</span>Progress</button></nav>
+
+<dialog id="smartDiaryDialog" aria-label="Smart food diary"><div class="dialoghead"><h2>✦ Smart food diary</h2><button class="iconbtn" type="button" onclick="closeSmartDiary()" aria-label="Close">✕</button></div>
+<section class="smart-card"><div class="eyebrow">DESCRIBE YOUR MEAL</div><p class="smart-note">Try “250g chicken breast, 150g cooked rice and 100g broccoli”. Food matches and nutrition are estimates from the local library — not AI analysis.</p>
+<textarea id="smartDescription" placeholder="I ate 200g chicken, 150g rice and 100g carrots…" aria-label="Describe food"></textarea>
+<div class="smart-actions"><button class="action" type="button" onclick="parseSmartMeal()">✦ Estimate foods</button><button class="action secondary" type="button" onclick="smartVoiceStart()" id="smartVoiceButton">🎤 Dictate</button></div>
+<div id="smartVoiceStatus" class="smart-note" role="status" aria-live="polite">On Android, you can also tap your keyboard microphone.</div>
+</section>
+<section class="smart-card"><div class="eyebrow">PHOTO ENTRY</div><p class="smart-note">Take a photo for reference, then describe the ingredients above. Automatic photo recognition needs a separate AI service and is not enabled in this free version.</p>
+<label class="action secondary sm" for="smartPhotoInput" style="display:inline-flex;align-items:center;min-height:46px">📷 Take / choose photo</label><input type="file" id="smartPhotoInput" accept="image/*" capture="environment" onchange="smartPhotoChosen(event)" style="position:absolute;width:1px;height:1px;opacity:0" aria-label="Choose food photo"><div id="smartPhotoArea"></div></section>
+<div class="field"><label for="smartMeal">Add to meal</label><select id="smartMeal"><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Snacks</option></select></div>
+<section class="smart-preview hide" id="smartReview"><div class="card-heading"><h3>Review before logging</h3><span class="tag">ESTIMATES</span></div><p class="smart-note">Adjust portions and confirm items. Only checked entries will be logged. Use Add food for anything not recognised.</p><div id="smartRows"></div><div id="smartTotal" class="smart-note" style="margin-top:12px"></div><div class="smart-footer"><button type="button" class="action" onclick="saveSmartItems()">✓ Add selected foods</button></div></section>
+<div id="smartWarning" class="smart-alert" role="status" aria-live="polite"></div>
+</dialog>
 <dialog id="foodDialog"><div class="dialoghead"><h2>Add food</h2><button class="iconbtn" onclick="stopBarcodeScan();closeDialog('foodDialog')">✕</button></div><section class="barcode-tools" aria-label="Barcode scanner">
 <div class="row" style="align-items:center;flex-wrap:wrap"><div><div class="eyebrow">BARCODE LOOKUP</div><div class="sub" style="font-size:12px">Scan a packaged food or enter its barcode</div></div><button type="button" class="action sm" onclick="startBarcodeScan()">▥ Scan with camera</button></div>
 <div id="scannerArea" class="hide" style="margin-top:12px"><div class="scanner-window"><video id="scannerVideo" autoplay muted playsinline></video><div class="scan-guide"></div></div><div id="scannerFallback" class="sub" style="margin:8px 0"></div><button type="button" class="action secondary sm" onclick="stopBarcodeScan()">Stop camera</button></div>
@@ -373,4 +399,115 @@ function useBarcodeProduct(){
 }
 barcodeUI('scannerArea').insertAdjacentHTML('beforeend','<div id="scannerFallbackContainer" class="hide"></div>');
 barcodeUI('foodDialog').addEventListener('close',()=>{stopBarcodeScan();barcodeUI('scannerVideo').style.display='block';barcodeUI('scannerFallbackContainer').classList.add('hide');});
-</script></body></html>
+</script>
+<script>
+// V6: local, rule-based interpretation. Does not transmit meal descriptions or photos.
+let smartCandidates=[], smartRecognition=null, smartPhotoURL=null;
+const smartEl=id=>document.getElementById(id);
+function openSmartDiary(){
+ smartEl('smartDescription').value=''; smartEl('smartReview').classList.add('hide');smartEl('smartWarning').textContent='';
+ smartEl('smartMeal').value='Breakfast'; smartEl('smartPhotoInput').value=''; smartEl('smartPhotoArea').innerHTML='';
+ if(smartPhotoURL){URL.revokeObjectURL(smartPhotoURL);smartPhotoURL=null}
+ smartCandidates=[];openDialog('smartDiaryDialog');
+}
+function closeSmartDiary(){
+ if(smartRecognition){try{smartRecognition.abort()}catch(e){}smartRecognition=null}
+ if(smartPhotoURL){URL.revokeObjectURL(smartPhotoURL);smartPhotoURL=null}
+ closeDialog('smartDiaryDialog');
+}
+function smartPhotoChosen(e){
+ const f=e.target.files?.[0];if(!f)return;
+ if(!f.type.startsWith('image/')){smartEl('smartWarning').textContent='Please choose an image.';return}
+ if(f.size>15*1024*1024){smartEl('smartWarning').textContent='Photo is larger than 15 MB; choose a smaller photo.';return}
+ if(smartPhotoURL)URL.revokeObjectURL(smartPhotoURL);
+ smartPhotoURL=URL.createObjectURL(f);const img=document.createElement('img');img.src=smartPhotoURL;img.alt='Food photo preview';img.className='smart-photo';
+ smartEl('smartPhotoArea').replaceChildren(img);
+ smartEl('smartWarning').textContent='Photo added as a reference only. Describe what is in the photo to estimate nutrition. The photo is not uploaded or saved.';
+}
+function smartVoiceStart(){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR){smartEl('smartVoiceStatus').textContent='Browser voice recognition is unavailable. Try the microphone on your phone keyboard instead.';smartEl('smartDescription').focus();return}
+ if(smartRecognition){try{smartRecognition.stop()}catch(e){}return}
+ try{
+ const rec=new SR();smartRecognition=rec;rec.lang='en-AU';rec.interimResults=false;rec.maxAlternatives=1;
+ smartEl('smartVoiceStatus').textContent='Listening… speak your meal, then pause.';
+ rec.onresult=e=>{const words=e.results?.[0]?.[0]?.transcript||'';if(words){smartEl('smartDescription').value=(smartEl('smartDescription').value.trim()+' '+words).trim();smartEl('smartVoiceStatus').textContent='Dictation added. Tap Estimate foods.'}};
+ rec.onerror=e=>{smartEl('smartVoiceStatus').textContent='Voice recognition unavailable ('+e.error+'). Try keyboard dictation.'};
+ rec.onend=()=>{smartRecognition=null;if(smartEl('smartVoiceStatus').textContent==='Listening… speak your meal, then pause.')smartEl('smartVoiceStatus').textContent='Dictation finished.'};
+ rec.start();
+ }catch(e){smartRecognition=null;smartEl('smartVoiceStatus').textContent='Microphone could not start. Use keyboard dictation.'}
+}
+const smartAliases=[
+ ['chicken breast','Chicken breast cooked'],['chicken','Chicken breast cooked'],['rice','White rice cooked'],
+ ['brown rice','Brown rice cooked'],['broccoli','Broccoli steamed'],['carrot','Carrot raw'],
+ ['carrots','Carrot raw'],['beef mince','Beef mince 5% fat raw'],['mince','Beef mince 5% fat raw'],
+ ['turkey','Turkey breast cooked'],['tuna','Tuna canned springwater drained'],
+ ['egg','Egg whole'],['eggs','Egg whole'],['oats','Oats dry rolled'],['oatmeal','Oats dry rolled'],
+ ['banana','Banana'],['apple','Apple'],['whey','Whey isolate powder typical'],
+ ['protein shake','Whey isolate powder typical'],['protein powder','Whey isolate powder typical'],
+ ['potato','Potato baked'],['salmon','Salmon cooked'],['yoghurt','Greek yoghurt plain nonfat'],
+ ['yogurt','Greek yoghurt plain nonfat'],['milk','Milk reduced fat'],['bread','Wholemeal bread'],
+ ['steak','Beef rump steak cooked'],['cucumber','Cucumber raw'],['cheese','Cheddar cheese'],
+ ['pasta','Pasta cooked plain'],['peanut butter','Peanut butter']
+];
+function smartParseAmount(fragment){
+ const text=fragment.toLowerCase();
+ const m=text.match(/(\d+(?:\.\d+)?)\s*(kilograms?|kg|grams?|g|millilit(?:res|ers)?|ml|lit(?:res|ers)?|l|oz|ounces?)\b/i);
+ if(m){let n=Number(m[1]);const u=m[2];if(/^(kg|kilo|litre|liter|l$)/.test(u))n*=1000;else if(/^(oz|ounce)/.test(u))n*=28.35;return Math.min(3000,Math.max(1,n))}
+ const count=text.match(/\b(\d+(?:\.\d+)?)\s*(?:x\s*)?(?:eggs?|bananas?|apples?|slices?|scoops?|cups?)\b/);
+ if(count){const n=Number(count[1]);const unit=count[0];if(/egg/.test(unit))return n*50;if(/banana/.test(unit))return n*120;if(/apple/.test(unit))return n*180;if(/slice/.test(unit))return n*35;if(/scoop/.test(unit))return n*30;if(/cup/.test(unit))return n*150}
+ return null;
+}
+function smartDbMatch(segment){
+ const q=segment.toLowerCase().replace(/\b(i|had|ate|some|of|with|and|the|a|an|for|my|meal|cooked|boiled|grilled|roasted|fried)\b/g,' ').replace(/\d+(?:\.\d+)?\s*(?:kg|grams?|g|ml|millilitres?|oz|cups?|scoops?|slices?)\b/g,' ').replace(/[^a-z\s]/g,' ').replace(/\s+/g,' ').trim();
+ const rows=databaseEntries();
+ const aliases=[...smartAliases].sort((a,b)=>b[0].length-a[0].length);
+ for(const [term,name] of aliases){if(new RegExp('\\b'+term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b').test(q)){
+ const found=rows.find(r=>r.name.toLowerCase()===name.toLowerCase());if(found)return found;
+ }}
+ const normalized=q.replace(/\b(slices?|pieces?|servings?|large|small|medium|fresh|raw)\b/g,' ').trim();
+ const ranked=rows.map(r=>({r,score:r.name.toLowerCase().split(/\W+/).filter(w=>w.length>2&&normalized.split(/\s+/).includes(w)).length})).sort((a,b)=>b.score-a.score);
+ return ranked[0]?.score>0?ranked[0].r:null;
+}
+function parseSmartMeal(){
+ const raw=smartEl('smartDescription').value.trim();smartEl('smartWarning').textContent='';
+ if(!raw){smartEl('smartWarning').textContent='Describe at least one food first.';return}
+ const parts=raw.replace(/[;\n]+/g,',').split(/\s*,\s*|\s+and\s+|\s+plus\s+/i).map(x=>x.trim()).filter(Boolean).slice(0,20);
+ smartCandidates=[];const missing=[];
+ for(const part of parts){const item=smartDbMatch(part);if(!item){missing.push(part);continue}
+ const portion=smartParseAmount(part)||item.portion||100;
+ const ratio=portion/(item.portion||100);
+ smartCandidates.push({name:item.name,portion,base:item,cal:r1(item.cal*ratio),p:r1(item.p*ratio),c:r1(item.c*ratio),f:r1(item.f*ratio),selected:true,source:part});
+ }
+ smartEl('smartReview').classList.toggle('hide',smartCandidates.length===0);
+ if(!smartCandidates.length){smartEl('smartWarning').textContent='No reliable food matches. Try “200g chicken breast, 150g cooked rice”, or use manual Add food.';return}
+ smartEl('smartWarning').textContent=(missing.length?'Not recognised: '+missing.join('; ')+'. Log those manually. ':'')+'Estimates only. Confirm food type, raw/cooked state and portion against what you actually ate.';
+ renderSmartReview();
+}
+function renderSmartReview(){
+ const c=smartEl('smartRows');c.replaceChildren();
+ smartCandidates.forEach((item,i)=>{
+ const row=document.createElement('div');row.className='smart-row';
+ const left=document.createElement('div');
+ const check=document.createElement('input');check.type='checkbox';check.checked=item.selected;check.style.width='auto';check.style.marginRight='8px';check.setAttribute('aria-label','Include '+item.name);check.onchange=()=>{item.selected=check.checked;smartTotals()};
+ const name=document.createElement('span');name.className='smart-name';name.textContent=item.name;
+ const heading=document.createElement('div');heading.append(check,name);left.append(heading);
+ const macro=document.createElement('div');macro.className='smart-macro';macro.id='smartMacro'+i;left.append(macro);
+ const amount=document.createElement('input');amount.type='number';amount.min='1';amount.max='3000';amount.step='1';amount.value=item.portion;amount.setAttribute('aria-label','Portion in grams for '+item.name);
+ amount.oninput=()=>{let n=Number(amount.value);if(!Number.isFinite(n)||n<1||n>3000)return;item.portion=n;const ratio=n/(item.base.portion||100);for(const k of ['cal','p','c','f'])item[k]=r1(item.base[k]*ratio);smartTotals()};
+ const right=document.createElement('div');const gram=document.createElement('label');gram.className='smart-note';gram.textContent='grams / mL';right.append(amount,gram);row.append(left,right);c.append(row);
+ });smartTotals();
+}
+function smartTotals(){
+ const t={cal:0,p:0,c:0,f:0};smartCandidates.forEach((x,i)=>{const el=smartEl('smartMacro'+i);if(el)el.textContent=fmt(x.cal)+' kcal · P '+r1(x.p)+'g · C '+r1(x.c)+'g · F '+r1(x.f)+'g';if(x.selected){for(const k of Object.keys(t))t[k]+=x[k]}});
+ smartEl('smartTotal').textContent='Selected estimate: '+fmt(t.cal)+' kcal · P '+r1(t.p)+'g · C '+r1(t.c)+'g · F '+r1(t.f)+'g';
+}
+function saveSmartItems(){
+ const items=smartCandidates.filter(x=>x.selected&&x.portion>0);
+ if(!items.length){smartEl('smartWarning').textContent='Choose at least one item.';return}
+ const meal=smartEl('smartMeal').value;
+ for(const x of items){day().foods.push({id:nextID(),name:x.name+' ('+Math.round(x.portion)+' g)',meal,cal:Math.round(x.cal),p:r1(x.p),c:r1(x.c),f:r1(x.f)})}
+ save();render();closeSmartDiary();toast(items.length+' food'+(items.length===1?'':'s')+' added to diary');
+}
+</script>
+</body></html>

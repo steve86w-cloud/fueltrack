@@ -1,17 +1,19 @@
-# FuelTrack V5 — Barcode Scanner
+# FuelTrack V6 — Smart Food Diary
 
-Compatible with the existing FuelTrack public GitHub Pages repository and previous locally stored diary entries (localStorage key `fueltrack-v2`).
+A free mobile-friendly nutrition PWA for Android and iPhone. V6 builds directly on V5, retains the original localStorage key `fueltrack-v2`, and preserves barcode lookup, custom foods, macros and weight logging.
 
-## Publishing
+## New in V6
+- Smart Log: describe meals in text, match foods in the built-in offline nutrition library, estimate portions and preview macros.
+- Optional browser speech recognition (availability differs by phone/browser; Android keyboard dictation can be used instead). Recognition may use the browser vendor’s online speech service.
+- Camera/photo input shows a temporary reference photo; **does not recognise foods automatically**, transmit or save photos.
+- Review and change portions and select foods before adding to the existing diary. Unknown foods require manual entry.
 
-1. Open FuelTrack and export a backup from Settings.
-2. Replace the root `index.html` and `sw.js` in your existing GitHub repository with these V5 files. The manifest and icons can remain unchanged.
-3. After GitHub Pages deploys, fully close and reopen the installed Pixel 8a app. If V4 remains, refresh the browser site and reopen the app; service-worker updates can take another launch.
+Nutrition matches are rule-based approximations, not AI. Verify values. AI photo recognition and conversational coaching require a separate securely hosted backend and are **not included**.
 
-## Barcode scanning
+## Update GitHub Pages
+1. Back up your data from FuelTrack Settings on your phone.
+2. Replace `index.html` and `sw.js` in your `fueltrack` repository with the V6 copies. Other files remain unchanged.
+3. Commit both changes, then reload the hosted website. Close and relaunch the home-screen app. Look for V6 at the top.
+4. Test Smart Log with `250g chicken breast, 150g rice and 100g broccoli`.
 
-Tap Scan barcode on Today or Diary, allow camera access, and point at the barcode. The Pixel 8a uses native BarcodeDetector when supported. For other browsers the app tries to load html5-qrcode from jsDelivr on demand (internet required). There is always manual code entry.
-
-Products are fetched from Open Food Facts (a community-run database). Lookups need internet; diary entries and previously saved personal foods remain local/offline. Missing nutrition is left at zero when loaded and must be corrected from the label before saving; the UI indicates missing fields. Data is provided under Open Food Facts licensing terms and may be incomplete.
-
-The scanner has not been physically tested on the user's phone. Camera permission and device/browser support are required.
+Data is stored on the current device and not synchronised. GitHub Pages only publishes the application code, not your diary data.
